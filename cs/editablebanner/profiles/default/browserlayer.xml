@@ -1,0 +1,6 @@
+<layers>
+  <layer
+      name="cs.editablebanner"
+      interface="cs.editablebanner.interfaces.IProductLayer"
+      />
+</layers>

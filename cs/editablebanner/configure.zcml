@@ -1,7 +1,37 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:five="http://namespaces.zope.org/five"
+    xmlns:gs="http://namespaces.zope.org/genericsetup"
     i18n_domain="cs.editablebanner">
 
+    <five:registerPackage package="." initialize=".initialize" />
+ 	
+    <gs:registerProfile
+        name="default"
+        title="cs.editablebanner"
+        directory="profiles/default"
+        description="Create an editable banner with portlet assignments"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+    <browser:page
+        name="editablebanner-controlpanel"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        class=".banner.EditableBannerControlPanel"
+        permission="cmf.ManagePortal"
+        layer=".interfaces.IProductLayer"
+        />
+
+    <adapter
+        factory=".banner.EditableBannerControlPanelAdapter"
+        />
+
+    <browser:viewlet
+        name="cs.editablebanner"
+        manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+        class=".banner.EditableBannerViewlet"
+        permission="zope2.View"
+        layer=".interfaces.IProductLayer"
+        />
 
 </configure>
